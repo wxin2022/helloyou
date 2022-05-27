@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0" />
+    <title>小程序跳转测试</title>
+</head>
+<body style="text-aligin:center;">
+<wx-open-launch-weapp
+        id="launch-btn"
+        username="gh_e16de8f****" <!-- 这里填写小程序的原始ID -->
+        path="/pages/index/index.html"> <!-- 这里填写跳转对于小程序的页面 注意这里的 .html -->
+    <template>
+        <style>.btn { padding: 12px width:200px;height:50px;}</style>
+        <button class="btn">打开小程序</button>
+    </template>
+</wx-open-launch-weapp>
+
+<script src="/js/jquery-1.12.4.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script> <!-- 至少必须是1.6版本 -->
+
+<script>
+    
+    $(function () {
+    
+        // config 的参数以及签名=
+        var url = location.href;
+        $.get("url", function(response){
+            if(response.status == 0) {
+                var info = response.data;
+                wx.config({
+                    debug: false,
+                    appId: info.appId,
+                    timestamp: info.timestamp,
+                    nonceStr: info.nonceStr,
+                    signature: info.signature,
+                    jsApiList: ["startRecord", "stopRecord", "onVoiceRecordEnd", "playVoice", "pauseVoice", "stopVoice", "onVoicePlayEnd", "uploadVoice", "downloadVoice", "chooseImage", "previewImage", "uploadImage", "downloadImage", "translateVoice", "getNetworkType", "openLocation", "getLocation"],//必须要不调用小程序标签渲染不出来
+                    openTagList: ['wx-open-launch-weapp']//必须必须要不调用小程序标签渲染不出来
+                });
+            }
+        });
+        //=== 获取 config 的参数以及签名=== end
+        wx.ready(function () {
+            // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中
+            console.log("res111");
+        });
+
+        wx.error(function (res) {
+            // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中
+            console.log("res", res);
+        });        
+
+        var btn = document.getElementById('launch-btn');
+        btn.addEventListener('launch', function (e) {
+            console.log('success');
+        });
+        btn.addEventListener('error', function (e) {
+            console.log('fail', e.detail);
+        });
+    });
+
+
+</script>
+</body>
+</html>
