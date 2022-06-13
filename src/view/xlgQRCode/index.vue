@@ -5,7 +5,7 @@
     </yy-form-item>
     <!-- <yy-button @click="createQRCode">生成二维码</yy-button> -->
     <canvas class="qr-code" ref="qrCodeContainer"></canvas>
-    <pdf src="哪吒融资租赁.pdf"></pdf>
+    
 
     <!-- <yy-button @click="testMixin">测试</yy-button>
     <yy-button @click="testRequest">测试testRequest</yy-button>
@@ -49,7 +49,7 @@ export default {
           name: 1234
         }
       },
-      audioUrl: 'https://tdrive-test-3.evcoming.com/sharego/pigx/drive-app/soundRecording/getSoundFile?beginTime=0&endTime=7030&serviceOrderId=494&token=lG2YfZPDykq1hzmvPsD4FA%3D%3D'
+      
     }
   },
   computed: {
@@ -86,7 +86,7 @@ export default {
         name: 555
       }
 
-      const url = 'https://tdrive-test-3.evcoming.com/sharego/pigx/drive-app/userEvaluation/222'
+      const url = ''
       axios.request(url, {
         url,
         method: 'post',
